@@ -40,6 +40,8 @@ def show_category(request, category_name_slug):
         context_dict['pages'] = None
 
     return render(request, 'rango/category.html', context=context_dict)
+
+@login_required
 def add_category(request):
     form = CategoryForm()
 
@@ -55,6 +57,7 @@ def add_category(request):
 
     return render(request, 'rango/add_category.html', {'form': form})
 
+@login_required
 def add_page(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
@@ -115,6 +118,7 @@ def register(request):
                   context={'user_form': user_form,
                            'profile_form': profile_form,
                            'registered': registered})
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
